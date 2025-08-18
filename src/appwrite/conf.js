@@ -55,28 +55,32 @@ export class Service {
         return false
     }
   }
-  async getPost(slug){
-    try {
-        await this.databases.getDocument(
-            config.appwriteDatabaseId,config.appwriteCollectionId,slug,
-        )
-        return true
-    } catch (error) {
-        console.log(error)
-        return false
-    }
+  async getPost(slug) {
+  try {
+    return await this.databases.getDocument(
+      config.appwriteDatabaseId,
+      config.appwriteCollectionId,
+      slug
+    );
+  } catch (error) {
+    console.log(error);
+    return null; // better than just false
   }
-  async getAllPosts(queries=[Query.equal("status","active")]){
-    try {
-        return await this.databases.listDocuments(
-            config.appwriteDatabaseId,config.appwriteCollectionId,queries
-        )
-        return true
-    } catch (error) {
-        console.log(error)
-        return false
-    }
+}
+
+async getAllPosts(queries = [Query.equal("status", "active")]) {
+  try {
+    return await this.databases.listDocuments(
+      config.appwriteDatabaseId,
+      config.appwriteCollectionId,
+      queries
+    );
+  } catch (error) {
+    console.log(error);
+    return []; // return empty array instead of false
   }
+}
+
   //File Upload Service
   async uploadFile(file){
     try {

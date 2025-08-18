@@ -1,6 +1,6 @@
 import config from "../configration/config.js"
 
-import {Client,Account,Id} from "appwrite"
+import {Client,Account,ID} from "appwrite"
 
 export class AuthService{
     client=new Client();
@@ -31,15 +31,15 @@ export class AuthService{
         throw  error
       }
    }
-   async getCurrentUser(){
-     try {
-        return await this.account.get()
-     } catch (error) {
-        throw error
-     }
+  async getCurrentUser() {
+  try {
+    return await this.account.get();
+  } catch (error) {
+    console.log("No active session:", error.message);
+    return null;
+  }
+}
 
-     return null;
-   }
   async logout(){
     try {
         await this.account.deleteSessions()
