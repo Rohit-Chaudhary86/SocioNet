@@ -1,43 +1,46 @@
-import { useState, useEffect } from "react";
-import "./App.css";
-import { useDispatch } from "react-redux";
-import authService from "./appwrite/auth.js";
-import { login, logout } from "./store/authSlice.js";
-import Header from "./components/Header/Header.jsx";
-import Footer from "./components/footer/Footer.jsx";
-import { Outlet } from "react-router-dom";
+import React, { useState, useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+import { useLocation } from 'react-router-dom'
+import './App.css'
+import authService from "./appwrite/auth"
+import { login, logout } from "./store/authSlice"
+import { Footer, Header } from './components'
+import { Outlet } from 'react-router-dom'
 
 function App() {
-  const [loading, setLoading] = useState(true);
-  const dispatch = useDispatch();
+  const [loading, setLoading] = useState(true)
+  const dispatch = useDispatch()
+  const location = useLocation()
 
   useEffect(() => {
-    authService
-      .getCurrentUser()
+    authService.getCurrentUser()
       .then((userData) => {
         if (userData) {
-          dispatch(login(userData));
+          dispatch(login({ userData }))
         } else {
-          dispatch(logout());
+          dispatch(logout())
         }
       })
-      .finally(() => setLoading(false));
-  }, []);
+      .finally(() => setLoading(false))
+  }, [])
+
+  // Hide footer only on the All Posts page
+  const shouldShowFooter = location.pathname !== '/all-posts';
 
   return !loading ? (
-    <div className="min-h-screen flex flex-col bg-gray-400">
+    <div className="flex flex-col min-h-screen bg-gray-400">
       {/* Header */}
       <Header />
 
-      {/* Main content will expand and push footer down */}
+      {/* Main content */}
       <main className="flex-grow">
-        TODO: <Outlet />
+        <Outlet />
       </main>
 
-      {/* Footer always at bottom */}
-      <Footer />
+      {/* Show footer on all pages EXCEPT /all-posts */}
+      {shouldShowFooter && <Footer />}
     </div>
-  ) : null;
+  ) : null
 }
 
-export default App;
+export default App

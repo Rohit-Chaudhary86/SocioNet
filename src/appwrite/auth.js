@@ -48,6 +48,36 @@ export class AuthService{
     }
   }
 
+  async  listFiles() {
+  try {
+    const files = await storage.listFiles('689d5ca10038d4ddf868');
+    console.log("Bucket files:", files.files.map(file => ({
+      $id: file.$id,
+      name: file.name,
+      size: file.sizeOriginal,
+      created: new Date(file.$createdAt).toLocaleString(),
+    })));
+  } catch (error) {
+    console.error("Error listing files:", error);
+  }
 }
+// ADD THIS NEW METHOD:
+  getFileView(fileId) {
+    if (!fileId) {
+      console.error("getFileView: fileId is missing");
+      return null;
+    }
+    try {
+      const view = this.bucket.getFileView(config.appwriteBucketId, fileId);
+      const url = view instanceof URL ? view.toString() : view;
+      console.log("getFileView response:", url);
+      return url;
+    } catch (error) {
+      console.error("getFileView error:", error);
+      return null;
+    }
+  }
+}
+//listFiles();
 const authService=new AuthService();
 export default authService;
