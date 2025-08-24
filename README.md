@@ -283,3 +283,7 @@ Create a new branch (feature/your-feature)
 Commit changes
 
 Open a pull request
+<img width="1906" height="1031" alt="Screenshot 2025-08-24 092532" src="https://github.com/user-attachments/assets/badd08a0-666a-4e76-ae03-9675fb8e2593" />
+<img width="1899" height="932" alt="Screenshot 2025-08-24 092519" src="https://github.com/user-attachments/assets/30c44c83-ee21-4871-8eb9-8eed69faa857" />
+<img width="1889" height="926" alt="Screenshot 2025-08-24 092509" src="https://github.com/user-attachments/assets/c618602e-2fad-4909-b45f-a2902b3c59bf" />
+<img width="1919" height="529" alt="Screenshot 2025-08-24 092433" src="https://github.com/user-attachments/assets/d228ace2-6d53-4dfa-9bd6-9d57c9805b3d" />
